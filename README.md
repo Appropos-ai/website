@@ -49,9 +49,56 @@ npm run dev
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## 🚢 Deployment to Vercel
+## 🚢 Deployment
 
-### Option 1: Vercel CLI
+### Build Output
+
+When you run `npm run build`, the static site is generated in the **`out/`** directory. This directory contains all HTML, CSS, JS, and assets ready for deployment to any static hosting provider.
+
+### Cloudflare Pages (Recommended)
+
+#### Option 1: Cloudflare Dashboard
+
+1. Build the project locally:
+```bash
+npm run build
+```
+
+2. Go to [Cloudflare Pages](https://pages.cloudflare.com)
+3. Create a new project
+4. Connect your GitHub repository OR drag & drop the `out/` folder
+5. Configure build settings:
+   - **Framework preset**: None (static)
+   - **Build command**: `npm run build`
+   - **Build output directory**: `out`
+
+#### Option 2: Wrangler CLI
+
+1. Install Wrangler:
+```bash
+npm install -g wrangler
+```
+
+2. Build and deploy:
+```bash
+npm run build
+wrangler pages deploy out --project-name=appropos
+```
+
+#### Option 3: GitHub Integration
+
+1. Push your code to GitHub
+2. Go to [Cloudflare Pages Dashboard](https://dash.cloudflare.com/?to=/:account/pages)
+3. Create project → Connect to Git
+4. Select your repository
+5. Set build settings:
+   - Build command: `npm run build`
+   - Build output directory: `out`
+6. Deploy!
+
+### Vercel (Alternative)
+
+#### Option 1: Vercel CLI
 
 1. Install Vercel CLI:
 ```bash
@@ -63,16 +110,12 @@ npm i -g vercel
 vercel
 ```
 
-### Option 2: GitHub Integration
+#### Option 2: GitHub Integration
 
 1. Push your code to GitHub
 2. Go to [vercel.com](https://vercel.com)
 3. Import your repository
 4. Deploy automatically
-
-### Option 3: One-Click Deploy
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/appropos-web)
 
 ## 📁 Project Structure
 
