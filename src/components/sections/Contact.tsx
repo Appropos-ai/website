@@ -3,13 +3,12 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
-import { Send, Mail, MapPin, Phone, CheckCircle } from 'lucide-react';
+import { Send, Mail, CheckCircle, AlertCircle } from 'lucide-react';
 import { Section, Button } from '@/components/ui';
 
 interface FormData {
   name: string;
   email: string;
-  company?: string;
   message: string;
 }
 
@@ -20,23 +19,14 @@ const contactInfo = [
     value: 'contact@appropos.ai',
     href: 'mailto:contact@appropos.ai',
   },
-  // {
-  //   icon: Phone,
-  //   title: 'Phone',
-  //   value: '+1 (555) 123-4567',
-  //   href: 'tel:+15551234567',
-  // },
-  // {
-  //   icon: MapPin,
-  //   title: 'Location',
-  //   value: 'San Francisco, CA',
-  //   href: '#',
-  // },
 ];
+
+const WEBHOOK_URL = 'https://n8n.jeffshouse.com/webhook/cd869eeb-ae9a-4f03-938a-2d4274de317e'; // TEST  = 'https://n8n.jeffshouse.com/webhook-test/cd869eeb-ae9a-4f03-938a-2d4274de317e';
 
 export default function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   
   const {
     register,
@@ -47,15 +37,38 @@ export default function Contact() {
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log('Form submitted:', data);
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    reset();
+    setSubmitError(null);
     
-    // Reset success message after 5 seconds
-    setTimeout(() => setIsSubmitted(false), 5000);
+    try {
+      const response = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          message: data.message,
+          timestamp: new Date().toISOString(),
+          source: 'appropos-website',
+        }),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+      
+      setIsSubmitted(true);
+      reset();
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => setIsSubmitted(false), 5000);
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setSubmitError('Failed to send message. Please try again or email us directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -139,6 +152,18 @@ export default function Contact() {
             </motion.div>
           ) : (
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+              {/* Error Message */}
+              {submitError && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex items-center gap-3 p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400"
+                >
+                  <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                  <p className="text-sm">{submitError}</p>
+                </motion.div>
+              )}
+
               {/* Name Field */}
               <div>
                 <label htmlFor="name" className="block text-sm font-medium mb-2">
@@ -183,20 +208,6 @@ export default function Contact() {
                 )}
               </div>
 
-              {/* Company Field (Optional) */}
-              <div>
-                <label htmlFor="company" className="block text-sm font-medium mb-2">
-                  Company <span className="text-foreground-secondary">(optional)</span>
-                </label>
-                <input
-                  type="text"
-                  id="company"
-                  {...register('company')}
-                  className="w-full px-4 py-3 rounded-lg bg-input-bg border-2 border-input-border text-foreground focus:border-input-focus focus:ring-2 focus:ring-input-focus/30 outline-none transition-all placeholder:text-foreground-secondary/60"
-                  placeholder="Your company"
-                />
-              </div>
-
               {/* Message Field */}
               <div>
                 <label htmlFor="message" className="block text-sm font-medium mb-2">
@@ -204,7 +215,7 @@ export default function Contact() {
                 </label>
                 <textarea
                   id="message"
-                  rows={4}
+                  rows={5}
                   {...register('message', { required: 'Message is required' })}
                   className={`w-full px-4 py-3 rounded-lg bg-input-bg border-2 text-foreground ${
                     errors.message ? 'border-red-500' : 'border-input-border'
