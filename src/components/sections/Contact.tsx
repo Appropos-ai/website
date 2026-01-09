@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { Send, Mail, CheckCircle, AlertCircle } from 'lucide-react';
 import { Section, Button } from '@/components/ui';
+import { analytics } from '@/components/analytics/GoogleAnalytics';
 
 interface FormData {
   name: string;
@@ -58,6 +59,9 @@ export default function Contact() {
         throw new Error('Failed to send message');
       }
       
+      // Track successful form submission
+      analytics.trackFormSubmission('contact', true);
+      
       setIsSubmitted(true);
       reset();
       
@@ -65,6 +69,10 @@ export default function Contact() {
       setTimeout(() => setIsSubmitted(false), 5000);
     } catch (error) {
       console.error('Form submission error:', error);
+      
+      // Track failed form submission
+      analytics.trackFormSubmission('contact', false);
+      
       setSubmitError('Failed to send message. Please try again or email us directly.');
     } finally {
       setIsSubmitting(false);
