@@ -20,18 +20,18 @@ const contactInfo = [
     value: 'contact@appropos.ai',
     href: 'mailto:contact@appropos.ai',
   },
-  {
-    icon: Phone,
-    title: 'Phone',
-    value: '+1 (555) 123-4567',
-    href: 'tel:+15551234567',
-  },
-  {
-    icon: MapPin,
-    title: 'Location',
-    value: 'San Francisco, CA',
-    href: '#',
-  },
+  // {
+  //   icon: Phone,
+  //   title: 'Phone',
+  //   value: '+1 (555) 123-4567',
+  //   href: 'tel:+15551234567',
+  // },
+  // {
+  //   icon: MapPin,
+  //   title: 'Location',
+  //   value: 'San Francisco, CA',
+  //   href: '#',
+  // },
 ];
 
 export default function Contact() {
