@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://appropos.dev",
+    url: "https://appropos.ai",
     siteName: "Appropos",
     title: "Appropos - Software Solutions Agency",
     description: "Transform your business with cutting-edge technology. From web applications to enterprise solutions, we deliver innovative software solutions.",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     ],
   },
   manifest: "/site.webmanifest",
-  metadataBase: new URL("https://appropos.dev"),
+  metadataBase: new URL("https://appropos.ai"),
 };
 
 export default function RootLayout({

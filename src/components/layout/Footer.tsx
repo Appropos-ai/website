@@ -5,10 +5,10 @@ import { Github, Twitter, Linkedin, Mail } from 'lucide-react';
 import { Container } from '@/components/ui';
 
 const socialLinks = [
-  { name: 'GitHub', icon: Github, href: '#' },
-  { name: 'Twitter', icon: Twitter, href: '#' },
-  { name: 'LinkedIn', icon: Linkedin, href: '#' },
-  { name: 'Email', icon: Mail, href: 'mailto:hello@appropos.dev' },
+  { name: 'GitHub', icon: Github, href: 'https://github.com/Appropos-ai' },
+  { name: 'Twitter', icon: Twitter, href: 'https://x.com/appropos_ai' },
+  { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/in/jeffreypelton/' },
+  { name: 'Email', icon: Mail, href: 'mailto:contact@appropos.ai' },
 ];
 
 const footerLinks = [
