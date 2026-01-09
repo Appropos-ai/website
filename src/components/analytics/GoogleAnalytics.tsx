@@ -14,12 +14,11 @@ declare global {
   }
 }
 
-const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+// GA Measurement ID - hardcoded for static export (not a secret - visible in client code)
+// For dynamic apps, use: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
+const GA_MEASUREMENT_ID = 'G-77HPPQ2WGJ';
 
 export default function GoogleAnalytics() {
-  if (!GA_MEASUREMENT_ID) {
-    return null;
-  }
 
   return (
     <>
