@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
-import { Send, Mail, CheckCircle, AlertCircle } from 'lucide-react';
+import { Send, Mail, CheckCircle, AlertCircle, Calendar } from 'lucide-react';
+import Link from 'next/link';
 import { Section, Button } from '@/components/ui';
 import { analytics } from '@/components/analytics/GoogleAnalytics';
 
@@ -19,6 +20,14 @@ const contactInfo = [
     title: 'Email',
     value: 'contact@appropos.ai',
     href: 'mailto:contact@appropos.ai',
+    isExternal: true,
+  },
+  {
+    icon: Calendar,
+    title: 'Book a Call',
+    value: 'Schedule an intro call',
+    href: '/book',
+    isExternal: false,
   },
 ];
 
@@ -114,25 +123,47 @@ export default function Contact() {
 
           {/* Contact Info */}
           <div className="space-y-4">
-            {contactInfo.map((info, index) => (
-              <motion.a
-                key={info.title}
-                href={info.href}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 + index * 0.1 }}
-                className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border hover:bg-card-hover hover:border-border-hover transition-all duration-300 group"
-              >
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                  <info.icon className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <div className="text-sm text-foreground-secondary">{info.title}</div>
-                  <div className="font-medium">{info.value}</div>
-                </div>
-              </motion.a>
-            ))}
+            {contactInfo.map((info, index) => {
+              const content = (
+                <>
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <info.icon className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <div className="text-sm text-foreground-secondary">{info.title}</div>
+                    <div className="font-medium">{info.value}</div>
+                  </div>
+                </>
+              );
+
+              const className = "flex items-center gap-4 p-4 rounded-xl bg-card border border-border hover:bg-card-hover hover:border-border-hover transition-all duration-300 group";
+
+              return info.isExternal ? (
+                <motion.a
+                  key={info.title}
+                  href={info.href}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + index * 0.1 }}
+                  className={className}
+                >
+                  {content}
+                </motion.a>
+              ) : (
+                <motion.div
+                  key={info.title}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + index * 0.1 }}
+                >
+                  <Link href={info.href} className={className}>
+                    {content}
+                  </Link>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
 
