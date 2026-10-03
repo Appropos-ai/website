@@ -6,7 +6,6 @@ import { useForm } from 'react-hook-form';
 import { Send, Mail, CheckCircle, AlertCircle, Calendar } from 'lucide-react';
 import Link from 'next/link';
 import { Section, Button } from '@/components/ui';
-import { analytics } from '@/components/analytics/GoogleAnalytics';
 
 interface FormData {
   name: string;
@@ -69,7 +68,7 @@ export default function Contact() {
       }
       
       // Track successful form submission
-      analytics.trackFormSubmission('contact', true);
+      window.umami?.track('contact-submit', { success: true });
       
       setIsSubmitted(true);
       reset();
@@ -80,7 +79,7 @@ export default function Contact() {
       console.error('Form submission error:', error);
       
       // Track failed form submission
-      analytics.trackFormSubmission('contact', false);
+      window.umami?.track('contact-submit', { success: false });
       
       setSubmitError('Failed to send message. Please try again or email us directly.');
     } finally {

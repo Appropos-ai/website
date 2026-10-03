@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -78,7 +78,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
-        <GoogleAnalytics />
+        <Script
+          src="https://s.wefav.com/js/site.js"
+          data-website-id="14e56690-b708-4e28-8eb6-80e6d5aef7c4"
+          data-domains="appropos.ai,www.appropos.ai"
+          strategy="afterInteractive"
+        />
         {children}
       </body>
     </html>
