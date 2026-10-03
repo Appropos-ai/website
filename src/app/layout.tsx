@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Appropos - Software Solutions Agency",
   description: "Transform your business with cutting-edge technology. From web applications to enterprise solutions, we deliver innovative software solutions that drive growth and efficiency.",
-  keywords: ["software development", "web development", "mobile apps", "cloud solutions", "API development", "software agency", "digital transformation"],
+  keywords: ["AI orchestration", "AI automation", "AI content generation", "AI agents", "software development", "web development", "mobile apps", "cloud solutions", "API development", "software agency", "digital transformation"],
   authors: [{ name: "Appropos" }],
   creator: "Appropos",
   publisher: "Appropos",

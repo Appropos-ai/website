@@ -6,12 +6,35 @@ import {
   Smartphone, 
   Cloud, 
   Database, 
-  Shield, 
-  Zap 
+  Zap,
+  Network,
+  Sparkles,
+  Workflow,
+  Bot
 } from 'lucide-react';
 import { Section, Card } from '@/components/ui';
 
 const services = [
+  {
+    icon: Network,
+    title: 'AI Orchestration',
+    description: 'Multi-model and multi-agent systems that route tasks, call your tools and data, and keep LLM workflows reliable, observable, and cost-efficient.',
+  },
+  {
+    icon: Sparkles,
+    title: 'Content Generation',
+    description: 'On-brand copy, documents, images, and product content generated at scale with human review, guardrails, and your own knowledge base.',
+  },
+  {
+    icon: Workflow,
+    title: 'Intelligent Automation',
+    description: 'AI-powered workflows that take over repetitive work like triage, data entry, reporting, and approvals across the tools your team already uses.',
+  },
+  {
+    icon: Bot,
+    title: 'AI Assistants & Agents',
+    description: 'Custom chat assistants and autonomous agents for support, sales, and internal operations, grounded in your data and integrated with your systems.',
+  },
   {
     icon: Code2,
     title: 'Web Development',
@@ -31,11 +54,6 @@ const services = [
     icon: Database,
     title: 'Data Engineering',
     description: 'Data pipelines, analytics platforms, and machine learning solutions to unlock insights from your data.',
-  },
-  {
-    icon: Shield,
-    title: 'Cybersecurity',
-    description: 'Security audits, penetration testing, and implementation of best practices to protect your digital assets.',
   },
   {
     icon: Zap,
@@ -93,8 +111,8 @@ export default function Services() {
           transition={{ delay: 0.2 }}
           className="text-foreground-secondary max-w-2xl mx-auto"
         >
-          We provide comprehensive software solutions tailored to your business needs, 
-          from concept to deployment and beyond.
+          From AI orchestration and automation to full-stack software, we build solutions 
+          tailored to your business needs, from concept to deployment and beyond.
         </motion.p>
       </div>
 
