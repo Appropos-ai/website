@@ -32,10 +32,12 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  // Relative to metadataBase, so each page gets its own canonical and og:url.
+  alternates: { canonical: "./" },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: SITE_URL,
+    url: "./",
     siteName: "Appropos",
     title: "Appropos - Software Solutions Agency",
     description: "Transform your business with cutting-edge technology. From web applications to enterprise solutions, we deliver innovative software solutions.",
