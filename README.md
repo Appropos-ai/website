@@ -124,7 +124,10 @@ src/
 ├── app/
 │   ├── globals.css      # Global styles and Tailwind config
 │   ├── layout.tsx       # Root layout with SEO metadata
-│   └── page.tsx         # Main landing page
+│   ├── page.tsx         # Main landing page
+│   ├── book/page.tsx    # Booking page (/book/)
+│   ├── robots.ts        # Generates /robots.txt
+│   └── sitemap.ts       # Generates /sitemap.xml
 ├── components/
 │   ├── layout/
 │   │   ├── Navigation.tsx
@@ -172,7 +175,7 @@ Update the content in each section component:
 
 ### SEO
 
-Update metadata in `src/app/layout.tsx`.
+Update metadata in `src/app/layout.tsx`. `robots.txt` and `sitemap.xml` are generated at build time from `src/app/robots.ts` and `src/app/sitemap.ts`. When you add a page, add its path to `PATHS` in `sitemap.ts`.
 
 ## 📝 Adding Favicons
 

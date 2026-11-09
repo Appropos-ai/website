@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { SITE_URL } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,10 +32,12 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  // Relative to metadataBase, so each page gets its own canonical and og:url.
+  alternates: { canonical: "./" },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://appropos.ai",
+    url: "./",
     siteName: "Appropos",
     title: "Appropos - Software Solutions Agency",
     description: "Transform your business with cutting-edge technology. From web applications to enterprise solutions, we deliver innovative software solutions.",
@@ -65,7 +68,7 @@ export const metadata: Metadata = {
     ],
   },
   manifest: "/site.webmanifest",
-  metadataBase: new URL("https://appropos.ai"),
+  metadataBase: new URL(SITE_URL),
 };
 
 export default function RootLayout({
