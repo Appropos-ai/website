@@ -20,8 +20,7 @@ Instructions for Claude Code sessions (and cowboy's pipeline stages) working on
   "Cloudflare Pages" on every commit). A push to `master` builds and deploys
   **https://appropos.ai** (CNAME → `website-7zb.pages.dev`). Branch pushes get preview
   deploys.
-- `wrangler.jsonc` names the Pages project (`website`, output `out/`). `vercel.json` is a
-  leftover from the starter template and is not used.
+- `wrangler.jsonc` names the Pages project (`website`, output `out/`).
 - So: never push anything to `master` that doesn't pass the gate below.
 
 ## Gate (must pass before every commit)
