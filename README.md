@@ -10,7 +10,8 @@ react-hook-form for the contact form. The site is a **static export**
 
 ## Getting started
 
-You need Node.js 20.9 or newer (Next 16 requires it).
+You need Node.js 20.19+, 22.13+ or 24+. Next 16 needs 20.9 or newer, and the lint toolchain
+(typescript-eslint) needs 20.19 or 22.13. The range is also in `engines` in `package.json`.
 
 ```sh
 git clone https://github.com/Appropos-ai/website.git
